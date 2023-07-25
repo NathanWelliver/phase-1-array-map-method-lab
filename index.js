@@ -12,5 +12,25 @@ const tutorials = [
 ];
 
 const titleCased = () => {
-  return tutorials
+  return tutorials.map(titleCaseString);
+};
+
+function titleCaseString(str) {
+  // List of words that should not be converted to title case (already properly capitalized).
+  const excludedWords = ["OO", "API", "NaN", "JSONP?"];
+
+  return str
+    .split(' ')
+    .map(word => {
+      if (excludedWords.includes(word.toUpperCase())) {
+        // If the word is in the excluded list, keep it as is.
+        return word;
+      } else {
+        // Convert other words to title case.
+        return word.charAt(0).toUpperCase() + word.slice(1)
+      }
+    })
+    .join(' ');
 }
+
+module.exports = titleCased;
